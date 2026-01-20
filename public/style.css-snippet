@@ -1,0 +1,51 @@
+/* Pipeline Styles */
+.pipeline-container {
+    margin-top: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    width: 600px; /* Wider to fit JSON */
+    max-width: 100%;
+}
+
+.pipeline-step {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.pipeline-step h4 {
+    color: var(--primary);
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pipeline-step pre {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85em;
+    color: #e2e8f0;
+}
+
+.pipeline-arrow {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 1.2em;
+    margin: 2px 0;
+}
+
+.step-1 { border-left: 3px solid #3b82f6; } /* Blue */
+.step-2 { border-left: 3px solid #8b5cf6; } /* Purple */
+.step-3 { border-left: 3px solid #ec4899; } /* Pink */
+.step-4 { border-left: 3px solid #10b981; } /* Green */
+
+.message.bot {
+    max-width: 90%; /* Allow wider messages for JSON */
+}

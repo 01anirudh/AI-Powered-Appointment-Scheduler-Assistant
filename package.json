@@ -1,0 +1,34 @@
+{
+    "name": "ai-appointment-scheduler",
+    "version": "1.0.0",
+    "description": "AI-Powered Appointment Scheduler Assistant with OCR and Entity Extraction",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "server": "nodemon server.js",
+        "start": "node server.js",
+        "dev": "node --watch server.js",
+        "test": "echo \"Server running on port 3000\""
+    },
+    "keywords": [
+        "appointment",
+        "scheduler",
+        "ocr",
+        "ai",
+        "nlp"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@google/generative-ai": "^0.24.1",
+        "@mistralai/mistralai": "^1.12.0",
+        "cors": "^2.8.5",
+        "date-fns": "^2.30.0",
+        "date-fns-tz": "^2.0.0",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "multer": "^1.4.5-lts.1",
+        "nodemon": "^3.1.11",
+        "zod": "^3.22.4"
+    }
+}

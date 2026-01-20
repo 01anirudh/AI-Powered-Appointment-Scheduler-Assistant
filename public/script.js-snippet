@@ -1,0 +1,91 @@
+function addMessage(text, type, stepsData = null) {
+    const id = Date.now();
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${type}`;
+    msgDiv.setAttribute('data-id', id);
+    
+    let content = `<div class="message-content">${text}</div>`;
+    
+    // If we have steps data, add the pipeline visualization
+    if (stepsData) {
+        content += `<div class="pipeline-container">
+            <div class="pipeline-step step-1">
+                <h4>Step 1: OCR/Text</h4>
+                <pre>${JSON.stringify(stepsData.step1, null, 2)}</pre>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step step-2">
+                <h4>Step 2: Entity Extraction</h4>
+                <pre>${JSON.stringify(stepsData.step2, null, 2)}</pre>
+            </div>
+            ${stepsData.step3 ? `
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step step-3">
+                <h4>Step 3: Normalization</h4>
+                <pre>${JSON.stringify(stepsData.step3, null, 2)}</pre>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step step-4">
+                <h4>Step 4: Final Output</h4>
+                <pre>${JSON.stringify(stepsData.step4, null, 2)}</pre>
+            </div>
+            ` : ''}
+        </div>`;
+    }
+    
+    msgDiv.innerHTML = content;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    return id;
+}
+
+// Update handleSend to pass steps data
+async function handleSend() {
+    const text = userInput.value.trim();
+    
+    if (!text && !currentImage) return;
+
+    // Add user message
+    addMessage(text || (currentImage ? "[Uploaded Image]" : ""), 'user');
+    userInput.value = '';
+
+    // Show loading state
+    const loadingId = addMessage('Processing pipeline...', 'bot');
+    const botMsgDiv = document.querySelector(`[data-id="${loadingId}"]`);
+
+    try {
+        let response;
+        if (currentImage) {
+            const formData = new FormData();
+            formData.append('image', currentImage);
+            response = await fetch('/api/upload', { method: 'POST', body: formData });
+            resetImage();
+        } else {
+            response = await fetch('/api/parse-text', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+        }
+
+        const data = await response.json();
+        
+        // Remove loading message and add actual response with steps
+        botMsgDiv.remove();
+        
+        if (data.status === 'success') {
+            addMessage("✅ Pipleline Completed Successfully:", 'bot', data.steps);
+        } else if (data.status === 'needs_clarification') {
+            addMessage(`⚠️ Clarification Needed: ${data.message}`, 'bot', data.steps);
+        } else {
+            addMessage(`❌ Error: ${data.error}`, 'bot');
+        }
+
+        fetchAppointments();
+
+    } catch (error) {
+        console.error(error);
+        const loadingMsg = document.querySelector(`[data-id="${loadingId}"]`);
+        if (loadingMsg) loadingMsg.querySelector('.message-content').textContent = "Error connecting to server.";
+    }
+}
