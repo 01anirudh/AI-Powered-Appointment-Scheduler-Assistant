@@ -36,8 +36,12 @@ app.use('/api', appointmentRoutes);
 // Error handling middleware
 app.use(errorHandler);
 
-// Start server
-app.listen(PORT);
+// Start server (only in development, not on Vercel)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
 
 export default app;
 
