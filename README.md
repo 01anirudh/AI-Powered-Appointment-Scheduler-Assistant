@@ -1,9 +1,8 @@
-# 🤖 AI-Powered Appointment Scheduler Assistant
+# AI-Powered Appointment Scheduler Assistant
 
 A modern, intelligent appointment scheduling system that uses AI-powered OCR and natural language processing to extract appointment details from images and text. Built with Node.js, Express, Mistral AI, and Google Gemini.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
+
 
 ## ✨ Features
 
