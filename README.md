@@ -366,20 +366,6 @@ The system uses IANA timezone identifiers. Common examples:
    - Missing information: "See doctor tomorrow"
    - Typos: "Cardiolgy apointment"
 
-## 📊 API Costs
-
-### Mistral AI (Pixtral-12b-2409)
-- **Input**: $0.15 per 1M tokens
-- **Typical image**: 500-1000 tokens
-- **Cost per image**: ~$0.0001-0.0002
-- **100 images/day**: ~$0.01-0.02/day
-
-### Google Gemini (2.5 Flash)
-- **Free tier**: 1,500 requests/day
-- **Paid tier**: Very affordable
-- **Typical request**: ~100-200 tokens
-
-**Estimated monthly cost for moderate use**: $1-5
 
 ## 🐛 Troubleshooting
 
@@ -464,9 +450,6 @@ Contributions are welcome! Please:
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
@@ -474,9 +457,6 @@ This project is licensed under the MIT License.
 - **Google** - For the Gemini AI API
 - **Open Source Community** - For the amazing libraries used
 
-## 📞 Support
-
-For detailed OCR documentation, see [`MISTRAL_OCR_GUIDE.md`](MISTRAL_OCR_GUIDE.md)
 
 ---
 
